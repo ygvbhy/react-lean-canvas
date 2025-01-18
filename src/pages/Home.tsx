@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import CanvasList from '../components/CanvasList';
 import SearchBar from '../components/SearchBar';
 import ViewToggle from '../components/ViewToggle';
+import CanvasList from '../components/canvas/CanvasList';
 import OriginCanvasItemData from '../data/OriginCanvasItem.json';
 import { CanvasItemProps } from '../types';
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
-import { NoteType } from '../types';
+import { NoteType } from '../../types';
 import CanvasNote from './CanvasNote';
 
 const CanvasCard = ({

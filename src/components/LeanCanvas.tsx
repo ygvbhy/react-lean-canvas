@@ -1,4 +1,4 @@
-import CanvasCard from './CanvasCard';
+import CanvasCard from './canvas/CanvasCard';
 
 function LeanCanvas() {
   return (

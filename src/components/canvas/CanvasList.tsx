@@ -1,4 +1,4 @@
-import { CanvasItemProps } from '../types';
+import { CanvasItemProps } from '../../types';
 import CanvasItem from './CanvasItem';
 
 const CanvasList = ({

@@ -1,6 +1,6 @@
 import { FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { CanvasItemProps } from '../types';
+import { CanvasItemProps } from '../../types';
 
 const CanvasItem = ({
   CanvasItem,
