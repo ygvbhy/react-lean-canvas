@@ -5,3 +5,8 @@ export interface CanvasItemProps {
   date: string;
   tags: string[];
 }
+
+export interface NoteType {
+  id: string;
+  content: string;
+}
