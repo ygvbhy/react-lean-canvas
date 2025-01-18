@@ -1,4 +1,4 @@
-export interface CardListProps {
+export interface CanvasItemProps {
   id: number;
   to: string;
   title: string;

@@ -1,18 +1,18 @@
 import { Link } from 'react-router-dom';
-import { CardListProps } from '../types';
+import { CanvasItemProps } from '../types';
 
-const CardList = ({ cardList }: { cardList: CardListProps }) => {
+const CanvasItem = ({ CanvasItem }: { CanvasItem: CanvasItemProps }) => {
   return (
     <Link
       className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105"
-      to={cardList.to}
+      to={CanvasItem.to}
     >
       <div className="p-6">
         <h2 className="text-2xl font-bold mb-2 text-gray-800">
-          {cardList.title}
+          {CanvasItem.title}
         </h2>
-        <p className="text-sm text-gray-600 mb-4">{cardList.date}</p>
-        {cardList.tags.map((item, index) => {
+        <p className="text-sm text-gray-600 mb-4">{CanvasItem.date}</p>
+        {CanvasItem.tags.map((item, index) => {
           return (
             <span
               key={index}
@@ -27,4 +27,4 @@ const CardList = ({ cardList }: { cardList: CardListProps }) => {
   );
 };
 
-export default CardList;
+export default CanvasItem;
