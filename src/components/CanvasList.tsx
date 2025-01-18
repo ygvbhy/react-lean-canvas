@@ -5,10 +5,12 @@ const CanvasList = ({
   filteredCanvasItemListData,
   searchText,
   isGrid,
+  onDeleteItem,
 }: {
   filteredCanvasItemListData: CanvasItemProps[];
   searchText: string;
   isGrid: boolean;
+  onDeleteItem: (id: number) => void;
 }) => {
   return (
     <>
@@ -23,7 +25,16 @@ const CanvasList = ({
           className={`grid gap-6 ${isGrid ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}
         >
           {filteredCanvasItemListData.map((item) => {
-            return <CanvasItem key={item.id} CanvasItem={item} />;
+            return (
+              <CanvasItem
+                key={item.id}
+                CanvasItem={item}
+                onDelete={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.preventDefault();
+                  onDeleteItem(item.id);
+                }}
+              />
+            );
           })}
         </div>
       )}

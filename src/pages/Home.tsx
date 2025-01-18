@@ -5,16 +5,20 @@ import ViewToggle from '../components/ViewToggle';
 import OriginCanvasItemData from '../data/OriginCanvasItem.json';
 import { CanvasItemProps } from '../types';
 
-const originCanvasItemList: CanvasItemProps[] = OriginCanvasItemData;
-
 function Home() {
   const [isGrid, setIsGrid] = useState(true);
   const [searchText, setSearchText] = useState('');
+  const [canvasItemList, setCanvasItemList] =
+    useState<CanvasItemProps[]>(OriginCanvasItemData);
   // debugger;
   // 해당 코드가 적힌 부분에서 웹 페이지가 멈추고 디버깅 가능하게 함
-  const filteredCanvasItemList = originCanvasItemList.filter((item) =>
+  const filteredCanvasItemList = canvasItemList.filter((item) =>
     item.title.toLowerCase().includes(searchText.toLowerCase()),
   );
+
+  const onDeleteItem = (id: number) => {
+    setCanvasItemList(canvasItemList.filter((item) => item.id !== id));
+  };
 
   return (
     <div className="container mx-auto px-4 py-16">
@@ -26,6 +30,7 @@ function Home() {
         filteredCanvasItemListData={filteredCanvasItemList}
         searchText={searchText}
         isGrid={isGrid}
+        onDeleteItem={onDeleteItem}
       />
     </div>
   );
