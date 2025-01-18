@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import ErrorPage from './pages/ErrorPage';
 import Home from './pages/Home';
 
 // 라우터 설정
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
     ],
+    errorElement: <ErrorPage />,
   },
 ]);
 
