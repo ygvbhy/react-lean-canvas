@@ -1,3 +1,11 @@
+import { useState } from 'react';
+import {
+  FaHome,
+  FaInfoCircle,
+  FaEnvelope,
+  FaBars,
+  FaTimes,
+} from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 const HeaderList = () => {
   // 라우터 이동 함수
@@ -5,39 +13,69 @@ const HeaderList = () => {
   // 함수에서 과정 진행 이후 페이지를 이동해야 할때
   // const navigate = useNavigate();
 
+  const navItems = [
+    { id: 'home', label: 'Home', icon: <FaHome />, to: '/' },
+    { id: 'about', label: 'About', icon: <FaInfoCircle />, to: '/about' },
+    { id: 'contact', label: 'Contact', icon: <FaEnvelope />, to: '/contact' },
+  ];
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <ul>
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? 'text-blue-500' : 'text-black'
-          }
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/about"
-          className={({ isActive }) =>
-            isActive ? 'text-blue-500' : 'text-black'
-          }
-        >
-          About
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/contact"
-          className={({ isActive }) =>
-            isActive ? 'text-blue-500' : 'text-black'
-          }
-        >
-          Contact
-        </NavLink>
-      </li>
-    </ul>
+    <header className="bg-gray-800 text-white px-4 sticky top-0 z-50">
+      <div className="container mx-auto flex justify-between items-center h-14">
+        <div>
+          <NavLink to="/" className="text-xl font-bold">
+            Lean Canvas
+          </NavLink>
+        </div>
+        <nav className="hidden md:flex space-x-4">
+          {navItems.map((item) => {
+            return (
+              <NavLink
+                key={item.id}
+                className="hover:text-gray-300"
+                to={item.to}
+              >
+                {item.label}
+              </NavLink>
+            );
+          })}
+        </nav>
+        <button className="md:hidden" onClick={toggleMenu}>
+          <FaBars />
+        </button>
+        <div className="hidden md:block bg-blue-500 hover:bg-blue-600 text-white font-bold py-1.5 px-4 rounded transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+          <button>로그인</button>
+        </div>
+      </div>
+      {/* 모바일 버전 메뉴 버튼 */}
+      <aside
+        className={`fixed top-0 left-0 w-64 h-full bg-gray-800 text-white z-50 md:hidden transfoem transition-transform duration-300 ease-in-out ${isMenuOpen ? 'tranlate-x-0' : '-translate-x-full'}`}
+      >
+        <div className="flex justify-end p-4">
+          <button className="focus:outline-none" aria-label="Close Menu">
+            <FaTimes className="h-6 w-6" onClick={toggleMenu} />
+          </button>
+        </div>
+        <nav className="flex flex-col space-y-4 p-4">
+          {navItems.map((item) => {
+            return (
+              <NavLink
+                key={item.id}
+                className="hover:text-gray-300"
+                to={item.to}
+              >
+                {item.label}
+              </NavLink>
+            );
+          })}
+        </nav>
+      </aside>
+    </header>
   );
 };
 
