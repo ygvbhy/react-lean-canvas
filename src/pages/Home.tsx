@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import { getCanvasData } from '../api/canvas';
 import SearchBar from '../components/SearchBar';
 import ViewToggle from '../components/ViewToggle';
 import CanvasList from '../components/canvas/CanvasList';
 import { CanvasItemProps } from '../types';
-
 function Home() {
   const [isGrid, setIsGrid] = useState(true);
   const [searchText, setSearchText] = useState('');
@@ -18,11 +18,8 @@ function Home() {
   };
 
   const getFetchCanvasData = async () => {
-    const data = await fetch('http://localhost:8000/canvases')
-      .then((res) => res.json())
-      .catch(console.error);
-
-    setCanvasItemList(data);
+    const response = await getCanvasData();
+    setCanvasItemList(response.data);
   };
 
   useEffect(() => {
