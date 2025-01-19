@@ -3,28 +3,24 @@ import { getCanvasData } from '../api/canvas';
 import SearchBar from '../components/SearchBar';
 import ViewToggle from '../components/ViewToggle';
 import CanvasList from '../components/canvas/CanvasList';
-import { CanvasItemProps } from '../types';
+import { CanvasItemProps, CanvasSearchParams } from '../types';
 function Home() {
   const [isGrid, setIsGrid] = useState(true);
   const [searchText, setSearchText] = useState('');
   const [canvasItemList, setCanvasItemList] = useState<CanvasItemProps[]>([]);
 
-  const filteredCanvasItemList = canvasItemList.filter((item) =>
-    item.title.toLowerCase().includes(searchText.toLowerCase()),
-  );
-
   const onDeleteItem = (id: number) => {
     setCanvasItemList(canvasItemList.filter((item) => item.id !== id));
   };
 
-  const getFetchCanvasData = async () => {
-    const response = await getCanvasData();
+  const getFetchCanvasData = async (params: CanvasSearchParams) => {
+    const response = await getCanvasData(params);
     setCanvasItemList(response.data);
   };
 
   useEffect(() => {
-    getFetchCanvasData();
-  }, []);
+    getFetchCanvasData({ title_like: searchText });
+  }, [searchText]);
 
   return (
     <div className="container mx-auto px-4 py-16">
@@ -33,7 +29,7 @@ function Home() {
         <ViewToggle isGrid={isGrid} setIsGrid={setIsGrid} />
       </div>
       <CanvasList
-        filteredCanvasItemListData={filteredCanvasItemList}
+        filteredCanvasItemListData={canvasItemList}
         searchText={searchText}
         isGrid={isGrid}
         onDeleteItem={onDeleteItem}

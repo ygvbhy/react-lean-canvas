@@ -10,3 +10,7 @@ export interface NoteType {
   id: string;
   content: string;
 }
+
+export interface CanvasSearchParams {
+  title_like: string;
+}
