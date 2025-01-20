@@ -1,13 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaCheck, FaEdit } from 'react-icons/fa';
 
-const CanvasTitle = () => {
+const CanvasTitle = ({
+  titleValue,
+  onChangeTitle,
+}: {
+  titleValue: string | undefined;
+  onChangeTitle: (title: string) => void;
+}) => {
   const [isEdit, setIsEdit] = useState(false);
-  const [title, setTitle] = useState('Lean Canvas!');
-  const [editingTitle, setEditingTitle] = useState(title);
+  const [title, setTitle] = useState(titleValue);
+
+  useEffect(() => {
+    setTitle(titleValue);
+  }, [titleValue]);
+
   const handleEditingTitleChange = () => {
     setIsEdit(false);
-    setTitle(editingTitle);
+    onChangeTitle(title!);
   };
 
   return (
@@ -16,8 +26,8 @@ const CanvasTitle = () => {
         <div className="flex items-center">
           <input
             type="text"
-            value={editingTitle}
-            onChange={(e) => setEditingTitle(e.target.value)}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             className="text-4xl font-bold text-center text-blue-600 bg-transparent border-b-2 border-blue-600 focus:outline-none"
           />
           <button
