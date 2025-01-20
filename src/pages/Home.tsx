@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { createCanvas, deleteCanvas, getCanvasData } from '../api/canvas';
 import Button from '../components/Button';
@@ -6,55 +7,60 @@ import Loading from '../components/Loading';
 import SearchBar from '../components/SearchBar';
 import ViewToggle from '../components/ViewToggle';
 import CanvasList from '../components/canvas/CanvasList';
+import { useApiRequest } from '../hooks/useApiRequest';
 import { CanvasItemProps, CanvasSearchParams } from '../types';
 
 function Home() {
   const [isGrid, setIsGrid] = useState(true);
   const [searchText, setSearchText] = useState('');
   const [canvasItemList, setCanvasItemList] = useState<CanvasItemProps[]>([]);
-  const [isLoadingCreateCanvas, setIsLoadingCreateCanvas] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+
+  const {
+    isLoading,
+    error,
+    execute: getCanvasDataList,
+  } = useApiRequest(getCanvasData);
+  const { isLoading: isLoadingCreateCanvas, execute: createNewCanvas } =
+    useApiRequest(createCanvas);
 
   const onDeleteItem = async (id: string) => {
     if (!confirm('정말로 삭제하시겠습니까?')) return;
 
     try {
-      setIsLoading(true);
       await deleteCanvas(id);
-      await getFetchCanvasData({ title_like: searchText });
+      await getCanvasDataList(
+        { title_like: searchText },
+        {
+          onSuccess: (response: AxiosResponse) =>
+            setCanvasItemList(response.data),
+        },
+      );
     } catch (error) {
       alert((error as Error).message);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const getFetchCanvasData = async (params: CanvasSearchParams) => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      const response = await getCanvasData(params);
-      setCanvasItemList(response.data);
-    } catch (err) {
-      setError(err as Error);
-    } finally {
-      setIsLoading(false);
-    }
+    getCanvasDataList(params, {
+      onSuccess: (response: AxiosResponse) => {
+        setCanvasItemList(response.data);
+      },
+    });
   };
 
   const handleCreateCanvas = async () => {
-    try {
-      setIsLoadingCreateCanvas(true);
-      const response = await createCanvas();
-      await getFetchCanvasData({ title_like: searchText });
-      console.log(response);
-    } catch (error) {
-      alert((error as Error).message);
-    } finally {
-      setIsLoadingCreateCanvas(false);
-    }
+    createNewCanvas(null, {
+      onSuccess: () => {
+        getCanvasDataList(
+          { title_like: searchText },
+          {
+            onSuccess: (response: AxiosResponse) =>
+              setCanvasItemList(response.data),
+          },
+        );
+      },
+      onError: (err) => alert(err.message),
+    });
   };
 
   useEffect(() => {
