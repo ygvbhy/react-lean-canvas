@@ -6,10 +6,12 @@ const CanvasCard = ({
   title,
   isSubTitle = false,
   notes = [],
+  onNotesChange,
 }: {
   title: string;
   isSubTitle?: boolean;
   notes: NoteType[];
+  onNotesChange: (notes: NoteType[]) => void;
 }) => {
   const handleAddNote = () => {};
 
@@ -17,6 +19,13 @@ const CanvasCard = ({
     console.log(id);
   };
 
+  const handleUpdateNote = (id: string, content: string, color: string) => {
+    onNotesChange(
+      notes.map((note) =>
+        note.id === id ? { ...note, content, color } : note,
+      ),
+    );
+  };
   return (
     <div className="row-span-1 bg-white min-h-48 border border-collapse border-gray-300">
       <div
@@ -38,6 +47,7 @@ const CanvasCard = ({
             id={note.id}
             color={note.color}
             removeNote={handleRemoveNote}
+            onUpdateNote={handleUpdateNote}
           />
         ))}
       </div>

@@ -6,11 +6,13 @@ const CanvasNote = ({
   id,
   color,
   removeNote,
+  onUpdateNote,
 }: {
   content: string;
   id: string;
   color: string;
   removeNote: (id: string) => void;
+  onUpdateNote: (id: string, content: string, color: string) => void;
 }) => {
   const colorOptions = [
     'bg-yellow-300',
@@ -20,7 +22,6 @@ const CanvasNote = ({
   ];
   const [isEditing, setIsEditing] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [textareaContent, setTextareaContent] = useState(content);
   const [noteColor, setNoteColor] = useState(() => {
     if (color) return color;
 
@@ -28,17 +29,22 @@ const CanvasNote = ({
     return colorOptions[randomColor];
   });
 
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onUpdateNote(id, e.target.value, noteColor);
+  };
+
+  const handleColorChange = (color: string) => {
+    setNoteColor(color);
+    onUpdateNote(id, content, color);
+  };
+
   useEffect(() => {
-    if (textareaContent === '') {
-      if (textareaRef.current) {
-        textareaRef.current.style.height = '128px';
-      }
-    }
     if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height =
         textareaRef.current.scrollHeight + 'px';
     }
-  }, [textareaContent]);
+  }, [content]);
 
   return (
     <div
@@ -72,8 +78,8 @@ const CanvasNote = ({
       </div>
       <textarea
         ref={textareaRef}
-        value={textareaContent}
-        onChange={(e) => setTextareaContent(e.target.value)}
+        value={content}
+        onChange={handleContentChange}
         className={`w-full bg-transparent resize-none border-none focus:outline-none text-gray-900 overflow-hidden h-auto min-h-[8rem]`}
         aria-label="Edit Note"
         placeholder="메모를 작성하세요."
@@ -86,7 +92,7 @@ const CanvasNote = ({
               key={index}
               className={`w-6 h-6 rounded-full cursor-pointer outline outline-gray-50 ${option}`}
               aria-label={`Change color to ${option}`}
-              onClick={() => setNoteColor(option)}
+              onClick={() => handleColorChange(option)}
             />
           ))}
         </div>

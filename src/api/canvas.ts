@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { v4 as uuidv4 } from 'uuid';
-import { CanvasSearchParams } from '../types';
+import { CanvasSearchParams, CanvasItemProps } from '../types';
 import { instance } from './http';
 
 export const getCanvasData = async (params: CanvasSearchParams) => {
@@ -44,4 +44,8 @@ export const updateCanvasTitle = async (id: string, title: string) => {
    * patch - 기존 자원 부분 업데이트
    */
   await instance.patch(`/canvases/${id}`, { title });
+};
+
+export const updateCanvas = async (id: string, canvas: CanvasItemProps) => {
+  await instance.patch(`/canvases/${id}`, canvas);
 };

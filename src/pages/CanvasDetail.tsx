@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getCanvasById, updateCanvasTitle } from '../api/canvas';
+import { getCanvasById, updateCanvas, updateCanvasTitle } from '../api/canvas';
 import LeanCanvas from '../components/LeanCanvas';
 import CanvasTitle from '../components/canvas/CanvasTitle';
 import { CanvasItemProps } from '../types';
@@ -25,13 +25,27 @@ const CanvasDetail = () => {
     }
   };
 
+  const handleCanvasChange = async (canvas: CanvasItemProps) => {
+    try {
+      await updateCanvas(id!, canvas);
+      setCanvasData(canvas);
+    } catch (error) {
+      alert((error as Error).message);
+    }
+  };
+
   return (
     <>
       <CanvasTitle
         titleValue={canvasData?.title}
         onChangeTitle={handleChangeTitle}
       />
-      {canvasData && <LeanCanvas canvasData={canvasData} />}
+      {canvasData && (
+        <LeanCanvas
+          canvasData={canvasData}
+          onCanvasChange={handleCanvasChange}
+        />
+      )}
     </>
   );
 };
