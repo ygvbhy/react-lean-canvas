@@ -3,7 +3,7 @@ import CanvasItem from './CanvasItem';
 
 const CanvasList = ({
   filteredCanvasItemListData,
-  searchText,
+  searchText = '',
   isGrid,
   onDeleteItem,
 }: {
