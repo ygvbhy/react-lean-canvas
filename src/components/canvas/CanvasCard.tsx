@@ -1,4 +1,5 @@
 import { FaPlus } from 'react-icons/fa';
+import { v4 as uuidv4 } from 'uuid';
 import { NoteType } from '../../types';
 import CanvasNote from './CanvasNote';
 
@@ -13,10 +14,17 @@ const CanvasCard = ({
   notes: NoteType[];
   onNotesChange: (notes: NoteType[]) => void;
 }) => {
-  const handleAddNote = () => {};
+  const handleAddNote = () => {
+    const newNote: NoteType = {
+      id: uuidv4(),
+      content: '',
+      color: '',
+    };
+    onNotesChange([...notes, newNote]);
+  };
 
   const handleRemoveNote = (id: string) => {
-    console.log(id);
+    onNotesChange(notes.filter((note) => note.id !== id));
   };
 
   const handleUpdateNote = (id: string, content: string, color: string) => {

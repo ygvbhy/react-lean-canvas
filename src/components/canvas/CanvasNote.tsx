@@ -22,6 +22,7 @@ const CanvasNote = ({
   ];
   const [isEditing, setIsEditing] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [localContent, setLocalContent] = useState(content);
   const [noteColor, setNoteColor] = useState(() => {
     if (color) return color;
 
@@ -29,8 +30,8 @@ const CanvasNote = ({
     return colorOptions[randomColor];
   });
 
-  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    onUpdateNote(id, e.target.value, noteColor);
+  const handleContentChange = () => {
+    onUpdateNote(id, localContent, noteColor);
   };
 
   const handleColorChange = (color: string) => {
@@ -78,8 +79,9 @@ const CanvasNote = ({
       </div>
       <textarea
         ref={textareaRef}
-        value={content}
-        onChange={handleContentChange}
+        value={localContent}
+        onChange={(e) => setLocalContent(e.target.value)}
+        onBlur={handleContentChange}
         className={`w-full bg-transparent resize-none border-none focus:outline-none text-gray-900 overflow-hidden h-auto min-h-[8rem]`}
         aria-label="Edit Note"
         placeholder="메모를 작성하세요."
