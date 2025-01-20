@@ -28,7 +28,7 @@ const CanvasList = ({
             return (
               <CanvasItem
                 key={item.id}
-                CanvasItem={item}
+                canvasItem={item}
                 onDelete={(e: React.MouseEvent<HTMLButtonElement>) => {
                   e.preventDefault(); // 기본 동작을 막는 메서드
                   // e.stopPropagation(); // 이벤트 전파를 막는 메서드

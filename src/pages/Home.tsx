@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getCanvasData } from '../api/canvas';
+import { createCanvas, getCanvasData } from '../api/canvas';
+import Button from '../components/Button';
 import Error from '../components/Error';
 import Loading from '../components/Loading';
 import SearchBar from '../components/SearchBar';
@@ -11,7 +12,7 @@ function Home() {
   const [isGrid, setIsGrid] = useState(true);
   const [searchText, setSearchText] = useState('');
   const [canvasItemList, setCanvasItemList] = useState<CanvasItemProps[]>([]);
-
+  const [isLoadingCreateCanvas, setIsLoadingCreateCanvas] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -33,6 +34,19 @@ function Home() {
     }
   };
 
+  const handleCreateCanvas = async () => {
+    try {
+      setIsLoadingCreateCanvas(true);
+      const response = await createCanvas();
+      await getFetchCanvasData({ title_like: searchText });
+      console.log(response);
+    } catch (error) {
+      alert((error as Error).message);
+    } finally {
+      setIsLoadingCreateCanvas(false);
+    }
+  };
+
   useEffect(() => {
     getFetchCanvasData({ title_like: searchText });
   }, [searchText]);
@@ -42,6 +56,15 @@ function Home() {
       <div className="mb-6 flex flex-col sm:flex-row items-center justify-between">
         <SearchBar searchText={searchText} setSearchText={setSearchText} />
         <ViewToggle isGrid={isGrid} setIsGrid={setIsGrid} />
+      </div>
+      <div className="flex justify-end mb-6">
+        <Button
+          loading={isLoadingCreateCanvas}
+          className=""
+          onClick={handleCreateCanvas}
+        >
+          새로운 캔버스 생성
+        </Button>
       </div>
       {isLoading && <Loading />}
       {error && (

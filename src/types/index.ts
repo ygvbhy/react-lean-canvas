@@ -3,7 +3,7 @@ export interface CanvasItemProps {
   to: string;
   title: string;
   date: string;
-  tags: string[];
+  tag: string;
 }
 
 export interface NoteType {

@@ -7,6 +7,8 @@ import {
   FaTimes,
 } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
+import Button from './Button';
+
 const HeaderList = () => {
   // 라우터 이동 함수
   // 라우터 설정 말고 일반 페이지에서 이동 해야 할때 넣으면 됨
@@ -48,9 +50,9 @@ const HeaderList = () => {
         <button className="md:hidden" onClick={toggleMenu}>
           <FaBars />
         </button>
-        <div className="hidden md:block bg-blue-500 hover:bg-blue-600 text-white font-bold py-1.5 px-4 rounded transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-          <button>로그인</button>
-        </div>
+        <Button loading={false} className="hidden md:block">
+          로그인
+        </Button>
       </div>
       {/* 모바일 버전 메뉴 버튼 */}
       <aside
