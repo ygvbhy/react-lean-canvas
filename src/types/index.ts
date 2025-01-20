@@ -4,11 +4,31 @@ export interface CanvasItemProps {
   title: string;
   date: string;
   tag: string;
+  problem?: Note;
+  customerSegments?: Note;
+  valueProposition?: Note;
+  uniqeSellingProposition?: Note;
+  channels?: Note;
+  customerRelationships?: Note;
+  revenueStreams?: Note;
+  costStructure?: Note;
+  keyMetrics?: Note;
+  highLevelConcept?: Note;
+  customerPathways?: Note;
+  existingAlternatives?: Note;
+  solution?: Note;
+  unfairAdvantage?: Note;
+  earlyAdopters?: Note;
+}
+
+export interface Note {
+  notes: NoteType[];
 }
 
 export interface NoteType {
   id: string;
   content: string;
+  color: string;
 }
 
 // 검색 조건 타입

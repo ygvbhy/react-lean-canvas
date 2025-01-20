@@ -31,7 +31,7 @@ const CanvasDetail = () => {
         titleValue={canvasData?.title}
         onChangeTitle={handleChangeTitle}
       />
-      <LeanCanvas />
+      {canvasData && <LeanCanvas canvasData={canvasData} />}
     </>
   );
 };

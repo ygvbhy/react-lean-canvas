@@ -4,10 +4,12 @@ import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 const CanvasNote = ({
   content,
   id,
+  color,
   removeNote,
 }: {
   content: string;
   id: string;
+  color: string;
   removeNote: (id: string) => void;
 }) => {
   const colorOptions = [
@@ -16,11 +18,15 @@ const CanvasNote = ({
     'bg-blue-300',
     'bg-green-300',
   ];
-  const randomColor = Math.floor(Math.random() * colorOptions.length);
   const [isEditing, setIsEditing] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [textareaContent, setTextareaContent] = useState(content);
-  const [color, setColor] = useState(colorOptions[randomColor]);
+  const [noteColor, setNoteColor] = useState(() => {
+    if (color) return color;
+
+    const randomColor = Math.floor(Math.random() * colorOptions.length);
+    return colorOptions[randomColor];
+  });
 
   useEffect(() => {
     if (textareaContent === '') {
@@ -37,7 +43,7 @@ const CanvasNote = ({
   return (
     <div
       onClick={() => setIsEditing(true)}
-      className={`p-4 ${color} relative max-h-[32rem] overflow-hidden`}
+      className={`p-4 ${noteColor} relative max-h-[32rem] overflow-hidden`}
     >
       <div className="absolute top-2 right-2">
         {isEditing ? (
@@ -80,7 +86,7 @@ const CanvasNote = ({
               key={index}
               className={`w-6 h-6 rounded-full cursor-pointer outline outline-gray-50 ${option}`}
               aria-label={`Change color to ${option}`}
-              onClick={() => setColor(option)}
+              onClick={() => setNoteColor(option)}
             />
           ))}
         </div>
