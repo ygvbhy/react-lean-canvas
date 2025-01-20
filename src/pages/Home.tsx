@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { createCanvas, getCanvasData } from '../api/canvas';
+import { createCanvas, deleteCanvas, getCanvasData } from '../api/canvas';
 import Button from '../components/Button';
 import Error from '../components/Error';
 import Loading from '../components/Loading';
@@ -16,8 +16,18 @@ function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const onDeleteItem = (id: number) => {
-    setCanvasItemList(canvasItemList.filter((item) => item.id !== id));
+  const onDeleteItem = async (id: string) => {
+    if (!confirm('정말로 삭제하시겠습니까?')) return;
+
+    try {
+      setIsLoading(true);
+      await deleteCanvas(id);
+      await getFetchCanvasData({ title_like: searchText });
+    } catch (error) {
+      alert((error as Error).message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const getFetchCanvasData = async (params: CanvasSearchParams) => {

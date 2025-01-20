@@ -10,7 +10,7 @@ const CanvasList = ({
   filteredCanvasItemListData: CanvasItemProps[];
   searchText: string;
   isGrid: boolean;
-  onDeleteItem: (id: number) => void;
+  onDeleteItem: (id: string) => void;
 }) => {
   return (
     <>
@@ -32,7 +32,7 @@ const CanvasList = ({
                 onDelete={(e: React.MouseEvent<HTMLButtonElement>) => {
                   e.preventDefault(); // 기본 동작을 막는 메서드
                   // e.stopPropagation(); // 이벤트 전파를 막는 메서드
-                  onDeleteItem(item.id);
+                  onDeleteItem(item.id.toString());
                 }}
               />
             );

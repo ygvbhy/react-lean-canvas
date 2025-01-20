@@ -25,3 +25,8 @@ export const createCanvas = async () => {
   const response = await instance.post('/canvases', newData);
   return response;
 };
+
+export const deleteCanvas = async (id: string) => {
+  const response = await instance.delete(`/canvases/${id}`);
+  return response;
+};
