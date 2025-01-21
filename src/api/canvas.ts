@@ -12,7 +12,7 @@ export const getCanvasData = async (params: CanvasSearchParams) => {
     params,
   );
   const response = await instance.get('/canvases', { params: payload });
-  return response;
+  return response.data;
 };
 
 export const createCanvas = async () => {

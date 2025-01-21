@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import Button from '../components/Button';
+import { CanvasItemProps } from '../types';
 
 const About = () => {
   const queryClient = useQueryClient();
@@ -29,7 +30,7 @@ const About = () => {
       <h2 className="text-3xl font-bold">useQuery</h2>
       {isLoading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
-      {data.map((item: any) => (
+      {data.map((item: CanvasItemProps) => (
         <li key={item.id}>{item.title}</li>
       ))}
 
