@@ -28,12 +28,15 @@ function Home() {
     refetch: refetchCanvasItemList,
   } = useQuery({
     queryKey: ['canvases', filter.searchText, filter.category],
-    queryFn: () =>
-      getCanvasData({
+    queryFn: () => {
+      console.log(123);
+      return getCanvasData({
         title_like: filter.searchText,
         tag_like: filter.category,
-      }),
-    initialData: [],
+      });
+    },
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
   });
 
   // 등록
