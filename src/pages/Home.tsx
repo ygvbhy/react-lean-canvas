@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { createCanvas, deleteCanvas, getCanvasData } from '../api/canvas';
 import Button from '../components/Button';
+import CategoryFilter from '../components/CategoryFilter';
 import Error from '../components/Error';
 import Loading from '../components/Loading';
 import SearchBar from '../components/SearchBar';
@@ -10,7 +11,12 @@ import CanvasList from '../components/canvas/CanvasList';
 
 function Home() {
   const [isGrid, setIsGrid] = useState(true);
-  const [searchText, setSearchText] = useState('');
+  const [filter, setFilter] = useState({
+    searchText: '',
+    category: '',
+  });
+  const handleFilter = (key: string, value: string) =>
+    setFilter((prev) => ({ ...prev, [key]: value }));
 
   const queryClient = useQueryClient();
 
@@ -21,8 +27,12 @@ function Home() {
     error,
     refetch: refetchCanvasItemList,
   } = useQuery({
-    queryKey: ['canvases', searchText],
-    queryFn: () => getCanvasData({ title_like: searchText }),
+    queryKey: ['canvases', filter.searchText, filter.category],
+    queryFn: () =>
+      getCanvasData({
+        title_like: filter.searchText,
+        tag_like: filter.category,
+      }),
     initialData: [],
   });
 
@@ -51,7 +61,16 @@ function Home() {
   return (
     <>
       <div className="mb-6 flex flex-col sm:flex-row items-center justify-between">
-        <SearchBar searchText={searchText} setSearchText={setSearchText} />
+        <div className="flex gap-2 flex-col sm:flex-row w-full mb-4 sm:mb-0">
+          <SearchBar
+            searchText={filter.searchText}
+            onSearch={(value) => handleFilter('searchText', value)}
+          />
+          <CategoryFilter
+            category={filter.category}
+            onCategoryChange={(value) => handleFilter('category', value)}
+          />
+        </div>
         <ViewToggle isGrid={isGrid} setIsGrid={setIsGrid} />
       </div>
       <div className="flex justify-end mb-6">
@@ -70,7 +89,7 @@ function Home() {
       {!isLoading && !error && (
         <CanvasList
           filteredCanvasItemListData={canvasItemList}
-          searchText={searchText}
+          searchText={filter.searchText}
           isGrid={isGrid}
           onDeleteItem={onDeleteItem}
         />
