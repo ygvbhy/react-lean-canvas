@@ -5,4 +5,7 @@ const create = (baseURL: string, options: AxiosRequestConfig) => {
   return instance;
 };
 
-export const instance = create('http://localhost:8000', {});
+export const instance = create(
+  'https://json-server-vercel-iota-opal.vercel.app',
+  {},
+);
