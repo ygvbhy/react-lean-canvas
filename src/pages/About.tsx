@@ -1,10 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import Button from '../components/Button';
 import { CanvasItemProps } from '../types';
 
 const About = () => {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const { isLoading, data, error } = useQuery({
     queryKey: ['canvases'],
     queryFn: () =>
@@ -12,18 +11,18 @@ const About = () => {
     initialData: [],
   });
 
-  const { mutate: createCanvas, isPending: isLoadingCreateCanvas } =
-    useMutation({
-      mutationFn: (newCanvas) =>
-        axios.post('http://localhost:8000/canvases/', newCanvas),
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['canvases'] });
-      },
-    });
+  // const { mutate: createCanvas, isPending: isLoadingCreateCanvas } =
+  //   useMutation({
+  //     mutationFn: (newCanvas) =>
+  //       axios.post('http://localhost:8000/canvases/', newCanvas),
+  //     onSuccess: () => {
+  //       queryClient.invalidateQueries({ queryKey: ['canvases'] });
+  //     },
+  //   });
 
-  const handleCreate = () => {
-    createCanvas({ title: 'new Canvas' });
-  };
+  // const handleCreate = () => {
+  //   createCanvas({ title: 'new Canvas' });
+  // };
 
   return (
     <>
@@ -35,14 +34,14 @@ const About = () => {
       ))}
 
       <h2 className="text-3xl font-bold mt-10">useMutation</h2>
-      {isLoadingCreateCanvas && <p>Loading...</p>}
-      <Button
-        onClick={handleCreate}
+      {/* {isLoadingCreateCanvas && <p>Loading...</p>} */}
+      <button
+        // onClick={handleCreate}
         className="mt-5"
-        loading={isLoadingCreateCanvas}
+        // loading={isLoadingCreateCanvas}
       >
         Create Canvas
-      </Button>
+      </button>
     </>
   );
 };
