@@ -1,50 +1,59 @@
-# React + TypeScript + Vite
+# React Lean Canvas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. Json Server
 
-Currently, two official plugins are available:
+Vercel Json Server:
+[GIT](https://github.com/ygvbhy/json-server-vercel)
+[Page](https://json-server-vercel-iota-opal.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 2. React + TS
 
-## Expanding the ESLint configuration
+Vercel 을 통해 배포
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+[page](https://react-lean-canvas.vercel.app/)
+Json Server와 Vercel의 특징으로 인해 추가, 수정, 삭제 기능은 동작하지 않음
 
-- Configure the top-level `parserOptions` property like this:
+## 3. Tailwind CSS
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+디자인은 Tailwind CSS를 사용하여 구현
+
+## 4. React Query
+
+Axios 를 기반으로 API 를 만들었으며 해당 API 를 사용하여 데이터를 조회, 추가, 수정, 삭제 기능을 구현
+GET 으로 가져오는 데이터는 React Query를 사용하여 캐싱 및 데이터 업데이트 기능을 구현
+
+## 5. React Router
+
+BrowserRouter 를 사용하여 라우팅 기능 구현
+vercel.json 파일을 통해 라우팅 기능 설정
+
+## 6. 프로젝트 설치 (clone)
+
+```bash
+git clone https://github.com/ygvbhy/react-lean-canvas.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 7. 프로젝트 실행
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
+```bash
+npm install
+npm run dev
 ```
+
+### 7.1 Local Json Server 실행
+
+```bash
+npm run db
+```
+
+## 8. 프로젝트 빌드
+
+```bash
+npm run build
+```
+
+vercel 에서 env 파일을 인식하지 못하므로 따로 설정을 해줘야 하는데 우선 패스하고 env 파일을 올림
+env, env.development, env.production 파일을 올려보았음
+
+TODO
+추후 따로 설정할 기회가 되면 설정한 뒤 env 파일을 지울예정
