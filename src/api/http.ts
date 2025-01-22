@@ -5,4 +5,6 @@ const create = (baseURL: string, options: AxiosRequestConfig) => {
   return instance;
 };
 
+console.log(import.meta.env.VITE_API_BASE_URL);
+
 export const instance = create(import.meta.env.VITE_API_BASE_URL, {});

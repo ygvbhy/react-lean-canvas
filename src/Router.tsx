@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 import App from './App';
 import About from './pages/About';
 import CanvasDetail from './pages/CanvasDetail';
@@ -7,7 +7,7 @@ import ErrorPage from './pages/ErrorPage';
 import Home from './pages/Home';
 
 // 라우터 설정
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <App />,
