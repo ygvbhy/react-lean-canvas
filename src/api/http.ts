@@ -5,7 +5,4 @@ const create = (baseURL: string, options: AxiosRequestConfig) => {
   return instance;
 };
 
-export const instance = create(
-  'https://json-server-vercel-iota-opal.vercel.app',
-  {},
-);
+export const instance = create(import.meta.env.VITE_API_BASE_URL, {});
