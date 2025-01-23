@@ -27,14 +27,14 @@ const HeaderList = () => {
   };
 
   return (
-    <header className="bg-gray-800 text-white px-4 sticky top-0 z-50">
-      <div className="container mx-auto flex justify-between items-center h-14">
+    <header className="sticky top-0 z-50 bg-gray-800 px-4 text-white">
+      <div className="container mx-auto flex h-14 items-center justify-between">
         <div>
           <NavLink to="/" className="text-xl font-bold">
             Lean Canvas
           </NavLink>
         </div>
-        <nav className="hidden md:flex space-x-4">
+        <nav className="hidden space-x-4 md:flex">
           {navItems.map((item) => {
             return (
               <NavLink
@@ -51,12 +51,12 @@ const HeaderList = () => {
           <FaBars />
         </button>
         <Button loading={false} className="hidden md:block">
-          로그인
+          버튼 디자인
         </Button>
       </div>
       {/* 모바일 버전 메뉴 버튼 */}
       <aside
-        className={`fixed top-0 left-0 w-64 h-full bg-gray-800 text-white z-50 md:hidden transfoem transition-transform duration-300 ease-in-out ${isMenuOpen ? 'tranlate-x-0' : '-translate-x-full'}`}
+        className={`transfoem fixed left-0 top-0 z-50 h-full w-64 bg-gray-800 text-white transition-transform duration-300 ease-in-out md:hidden ${isMenuOpen ? 'tranlate-x-0' : '-translate-x-full'}`}
       >
         <div className="flex justify-end p-4">
           <button className="focus:outline-none" aria-label="Close Menu">

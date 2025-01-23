@@ -15,7 +15,7 @@ const CanvasList = ({
   return (
     <>
       {filteredCanvasItemListData.length === 0 ? (
-        <div className="text-center py-10">
+        <div className="py-10 text-center">
           <p className="text-xl text-gray-600">
             {searchText ? '검색 결과가 없습니다' : '목록이 없습니다'}
           </p>

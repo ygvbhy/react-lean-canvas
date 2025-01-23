@@ -11,20 +11,20 @@ const CanvasItem = ({
 }) => {
   return (
     <Link
-      className="relative bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105"
+      className="relative overflow-hidden rounded-lg bg-white shadow-md transition-transform duration-300 hover:scale-105"
       to={`/canvases/${canvasItem.id}`}
     >
       <div className="p-6">
-        <h2 className="text-2xl font-bold mb-2 text-gray-800">
+        <h2 className="mb-2 text-2xl font-bold text-gray-800">
           {canvasItem.title}
         </h2>
-        <p className="text-sm text-gray-600 mb-4">{canvasItem.date}</p>
-        <span className="inline-block px-3 py-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">
+        <p className="mb-4 text-sm text-gray-600">{canvasItem.date}</p>
+        <span className="inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700">
           {canvasItem.tag}
         </span>
       </div>
       <button
-        className="absolute top-2 right-2 p-2 text-red-500 rounded-full"
+        className="absolute right-2 top-2 rounded-full p-2 text-red-500"
         aria-label="Delete"
         onClick={onDelete}
       >

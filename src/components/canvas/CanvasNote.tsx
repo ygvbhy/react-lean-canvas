@@ -52,7 +52,7 @@ const CanvasNote = ({
       onClick={() => setIsEditing(true)}
       className={`p-4 ${noteColor} relative max-h-[32rem] overflow-hidden`}
     >
-      <div className="absolute top-2 right-2">
+      <div className="absolute right-2 top-2">
         {isEditing ? (
           <button
             aria-label="Check Note"
@@ -82,7 +82,7 @@ const CanvasNote = ({
         value={localContent}
         onChange={(e) => setLocalContent(e.target.value)}
         onBlur={handleContentChange}
-        className={`w-full bg-transparent resize-none border-none focus:outline-none text-gray-900 overflow-hidden h-auto min-h-[8rem]`}
+        className={`h-auto min-h-[8rem] w-full resize-none overflow-hidden border-none bg-transparent text-gray-900 focus:outline-none`}
         aria-label="Edit Note"
         placeholder="메모를 작성하세요."
         readOnly={!isEditing}
@@ -92,7 +92,7 @@ const CanvasNote = ({
           {colorOptions.map((option, index) => (
             <button
               key={index}
-              className={`w-6 h-6 rounded-full cursor-pointer outline outline-gray-50 ${option}`}
+              className={`h-6 w-6 cursor-pointer rounded-full outline outline-gray-50 ${option}`}
               aria-label={`Change color to ${option}`}
               onClick={() => handleColorChange(option)}
             />

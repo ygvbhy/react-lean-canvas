@@ -33,7 +33,7 @@ const About = () => {
         <li key={item.id}>{item.title}</li>
       ))}
 
-      <h2 className="text-3xl font-bold mt-10">useMutation</h2>
+      <h2 className="mt-10 text-3xl font-bold">useMutation</h2>
       {/* {isLoadingCreateCanvas && <p>Loading...</p>} */}
       <button
         // onClick={handleCreate}

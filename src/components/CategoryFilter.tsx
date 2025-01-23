@@ -11,7 +11,7 @@ const CategoryFilter = ({
     <select
       value={category}
       onChange={(e) => onCategoryChange(e.target.value)}
-      className="border p-2 rounded-lg w-full sm:w-32"
+      className="w-full rounded-lg border p-2 sm:w-32"
     >
       <option value="">전체</option>
       {categories.map((category) => (

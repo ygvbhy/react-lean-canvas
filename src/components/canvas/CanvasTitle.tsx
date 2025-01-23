@@ -21,17 +21,17 @@ const CanvasTitle = ({
   };
 
   return (
-    <div className="flex items-center justify-center mb-10">
+    <div className="mb-10 flex items-center justify-center">
       {isEdit ? (
         <div className="flex items-center">
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="text-4xl font-bold text-center text-blue-600 bg-transparent border-b-2 border-blue-600 focus:outline-none"
+            className="border-b-2 border-blue-600 bg-transparent text-center text-4xl font-bold text-blue-600 focus:outline-none"
           />
           <button
-            className="ml-2 p-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+            className="ml-2 rounded-full bg-green-500 p-2 text-white transition duration-300 ease-in-out hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
             aria-label="Save title"
             onClick={handleEditingTitleChange}
           >
@@ -40,9 +40,9 @@ const CanvasTitle = ({
         </div>
       ) : (
         <>
-          <h1 className="text-4xl font-bold text-center ">{title}</h1>
+          <h1 className="text-center text-4xl font-bold">{title}</h1>
           <button
-            className="ml-2 p-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
+            className="ml-2 rounded-full bg-yellow-500 p-2 text-white transition duration-300 ease-in-out hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
             aria-label="Edit title"
             onClick={() => setIsEdit(true)}
           >

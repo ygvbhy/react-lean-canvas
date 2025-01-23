@@ -27,7 +27,7 @@ const Button = ({
   return (
     <button className={buttonClass} onClick={handleClick} disabled={loading}>
       <span className="flex items-center justify-center">
-        {loading && <FaSpinner className="animate-spin mr-2" />}
+        {loading && <FaSpinner className="mr-2 animate-spin" />}
         {children}
       </span>
     </button>

@@ -63,8 +63,8 @@ function Home() {
 
   return (
     <>
-      <div className="mb-6 flex flex-col sm:flex-row items-center justify-between">
-        <div className="flex gap-2 flex-col sm:flex-row w-full mb-4 sm:mb-0">
+      <div className="mb-6 flex flex-col items-center justify-between sm:flex-row">
+        <div className="mb-4 flex w-full flex-col gap-2 sm:mb-0 sm:flex-row">
           <SearchBar
             searchText={filter.searchText}
             onSearch={(value) => handleFilter('searchText', value)}
@@ -76,7 +76,7 @@ function Home() {
         </div>
         <ViewToggle isGrid={isGrid} setIsGrid={setIsGrid} />
       </div>
-      <div className="flex justify-end mb-6">
+      <div className="mb-6 flex justify-end">
         <Button
           loading={isLoadingCreateCanvas}
           className=""
